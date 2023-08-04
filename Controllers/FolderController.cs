@@ -5,6 +5,7 @@ using EntityLayer.Concrete;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -20,7 +21,7 @@ namespace DriveUI.Controllers
             var folders = folderManager.GetFolders();
             return View(folders);
         }
-        
+
         public IActionResult FolderDetails(int id)
         {
             var folderValues = folderManager.GetByID(id);
@@ -50,9 +51,10 @@ namespace DriveUI.Controllers
             {
                 folderManager.FolderAdd(folder);
                 return RedirectToAction("GetFolders");
-            } else
+            }
+            else
             {
-                foreach(var item in results.Errors)
+                foreach (var item in results.Errors)
                 {
                     ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
                 }

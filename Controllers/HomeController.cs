@@ -19,7 +19,8 @@ namespace DriveUI.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        [Authorize(Roles = "No Role")]
+        public IActionResult NoRoleHome()
         {
             return View();
         }

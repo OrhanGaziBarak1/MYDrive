@@ -63,7 +63,15 @@ namespace DriveUI.Controllers
                     accessor.HttpContext.Session.SetString("UserName", claims[0].Value);
                     accessor.HttpContext.Session.SetString("UserRole", claims[1].Value);
                 }
-                return RedirectToAction("Index", "Home");
+
+                if (claims[1].Value != "No Role")
+                {
+                    return RedirectToAction("Index", "Home");
+                } else
+                {
+                    return RedirectToAction("NoRoleHome", "Home");
+                }
+ 
             }
             else
             {

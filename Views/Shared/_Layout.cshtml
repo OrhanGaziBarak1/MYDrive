@@ -16,7 +16,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <div style="display:flex; align-items:center; width:500px;">
+                <div style="display:flex; align-items:center; width:32%;">
                     <img src="~/eti-maden-logo.jpg" style="width:30%; height:30%" />
                     <p class="navbar-brand">Drive</p>
                 </div>
@@ -24,10 +24,10 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse justify-content-between" style="display:flex; justify-content:space-between">
+                <div class="navbar-collapse collapse justify-content-lg-start">
                     @if (accessor.HttpContext.Session.GetString("UserRole") != null && accessor.HttpContext.Session.GetString("UserRole") == "Admin")
                     {
-                        <ul class="navbar-nav flex-grow-1">
+                        <ul class="navbar-nav flex-grow-0">
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="GetUsers">Users</a>
                             </li>
@@ -36,9 +36,6 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Document" asp-action="GetDocumentList">Documents</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="DocumentType" asp-action="GetDocumentTypeList">Document Types</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="GetRoles">Roles</a>
@@ -51,9 +48,9 @@
                             </li>
                         </ul>
                     }
-                    @if (accessor.HttpContext.Session.GetString("UserRole") != null && accessor.HttpContext.Session.GetString("UserRole") != "Admin")
+                    @if (accessor.HttpContext.Session.GetString("UserRole") != null && (accessor.HttpContext.Session.GetString("UserRole") != "Admin" && accessor.HttpContext.Session.GetString("UserRole") != "No Role"))
                     {
-                        <ul class="navbar-nav flex-grow-1">
+                        <ul class="navbar-nav flex-grow-0">
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Document" asp-action="GetDocumentList">Documents</a>
                             </li>
@@ -78,7 +75,7 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container" style="display:flex; align-items:center;">
+        <div class="container-fluid" style="display:flex; align-items:center;">
             &copy; 2023 - Developed by <a class="nav-link text-dark" href="~/orhangazibarakcv.html">
                 Orhan Gazi Barak
             </a>
