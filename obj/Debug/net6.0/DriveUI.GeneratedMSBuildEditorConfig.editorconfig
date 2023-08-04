@@ -16,22 +16,6 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Orhan Gazi Barak\source\repos\DriveUI
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Orhan Gazi Barak/source/repos/DriveUI/Views/DocumentType/AddDocumentType.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRUeXBlXEFkZERvY3VtZW50VHlwZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Orhan Gazi Barak/source/repos/DriveUI/Views/DocumentType/DocumentTypeDetailsView.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRUeXBlXERvY3VtZW50VHlwZURldGFpbHNWaWV3LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Orhan Gazi Barak/source/repos/DriveUI/Views/DocumentType/DocumentTypeUpdate.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRUeXBlXERvY3VtZW50VHlwZVVwZGF0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Orhan Gazi Barak/source/repos/DriveUI/Views/DocumentType/GetDocumentTypeList.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRUeXBlXEdldERvY3VtZW50VHlwZUxpc3QuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Orhan Gazi Barak/source/repos/DriveUI/Views/Document/AddDocument.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRcQWRkRG9jdW1lbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

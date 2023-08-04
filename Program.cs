@@ -12,7 +12,6 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddScoped<IValidator<User>, UserValidator>();
 builder.Services.AddScoped<IValidator<Role>, RoleValidator>();
 builder.Services.AddScoped<IValidator<Document>, DocumentValidator>();
-//builder.Services.AddScoped<IValidator<DocumentType>, DocumentTypeValidator>();
 builder.Services.AddScoped<IValidator<Folder>, FolderValidator>();
 builder.Services.AddScoped<IValidator<RoleAuthority>, RoleAuthorityValidator>();
 builder.Services.AddScoped<IValidator<UserAuthority>, UserAuthorityValidator>();
