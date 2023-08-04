@@ -8,6 +8,7 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -62,6 +63,7 @@ namespace DriveUI.Controllers
                 {
                     accessor.HttpContext.Session.SetString("UserName", claims[0].Value);
                     accessor.HttpContext.Session.SetString("UserRole", claims[1].Value);
+                    accessor.HttpContext.Session.SetInt32("UserID", loginManager.isUser.UserID);
                 }
 
                 if (claims[1].Value != "No Role")
@@ -115,6 +117,32 @@ namespace DriveUI.Controllers
                 userManager.AddUser(user);
                 TempData["registerSuccess"] = "You registered successfully.";
                 return RedirectToAction("Login");
+            }
+            else
+            {
+                foreach (var item in results.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+            }
+            return View();
+        }
+        [HttpGet]
+        public IActionResult MyProfile(int id)
+        {
+            var profile = userManager.GetByID(id);
+            return View(profile);
+        }
+        [HttpPost]
+        public IActionResult MyProfile(User user)
+        {
+            UserValidator validator = new UserValidator();
+            ValidationResult results = validator.Validate(user);
+
+            if (results.IsValid)
+            {
+                userManager.UserUpdate(user);
+                return RedirectToAction("Index", "Home");
             }
             else
             {

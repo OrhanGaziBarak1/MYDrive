@@ -16,7 +16,7 @@
 <table class="table table-striped table-hover text-center">
     <tr>
         <th>Name</th>
-        <th>Root ID</th>
+@*        <th>Root ID</th>*@
         <th>Actions</th>
     </tr>
 
@@ -24,7 +24,7 @@
     {
         <tr>
             <td>@item.FolderName</td>
-            <td>@item.RootFolderID</td>
+@*            <td>@ViewBag.ParentFolderName</td>*@
             <td>
                 <div style="display:flex; justify-content:space-evenly;">
                     <a href="/Folder/FolderUpdate/@item.FolderID" class="btn btn-outline-primary" style="display:flex; align-items:center;">

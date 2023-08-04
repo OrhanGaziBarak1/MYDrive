@@ -17,11 +17,14 @@ namespace DriveUI.Controllers
         RoleManager roleManager = new RoleManager(new EFRoleDal());
 
         Context context = new Context();
+
+
         public IActionResult GetUsers()
         {
             var users = userManager.GetUsers();
             return View(users);
         }
+
 
         public IActionResult UserDetails(int id)
         {
@@ -30,6 +33,7 @@ namespace DriveUI.Controllers
             ViewBag.UserAuthorityValues = userAuthorityValues;
             return View(userValues);
         }
+
 
         [HttpGet]
         public IActionResult AddUser()
@@ -43,6 +47,7 @@ namespace DriveUI.Controllers
             ViewBag.Roles = roleValues;
             return View();
         }
+
         [HttpPost]
         public IActionResult AddUser(User user)
         {
@@ -63,12 +68,14 @@ namespace DriveUI.Controllers
             }
             return View();
         }
+
         public IActionResult RemoveUser(int id)
         {
             var userValues = userManager.GetByID(id);
             userManager.DeleteUser(userValues);
             return RedirectToAction("GetUsers");
         }
+
         [HttpGet]
         public IActionResult UserUpdate(int id)
         {

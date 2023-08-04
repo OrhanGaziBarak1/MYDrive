@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using static NuGet.Packaging.PackagingConstants;
 
 namespace DriveUI.Controllers
 {
@@ -15,6 +17,8 @@ namespace DriveUI.Controllers
     public class FolderController : Controller
     {
         FolderManager folderManager = new FolderManager(new EFFolderDal());
+
+        Context context = new Context();
 
         public IActionResult GetFolders()
         {
@@ -25,6 +29,16 @@ namespace DriveUI.Controllers
         public IActionResult FolderDetails(int id)
         {
             var folderValues = folderManager.GetByID(id);
+            var parentFolder = context.Folders.FirstOrDefault(x => x.FolderID == folderValues.RootFolderID);
+            if (parentFolder != null)
+            {
+                ViewBag.ParentFolderName = parentFolder.FolderName;
+            }
+            else
+            {
+                ViewBag.ParentFolderName = "This folder has not a parent folder.";
+            }
+
             return View(folderValues);
         }
 

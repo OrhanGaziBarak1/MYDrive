@@ -59,6 +59,10 @@
                         @if (accessor.HttpContext.Session.GetString("UserName") != null)
                         {
                             <div class="nav-item text-dark" style="display:flex; align-items:center;">
+                            <a style="margin-right:15px;" class="btn btn-outline-success text-success" href="/Login/MyProfile/@accessor.HttpContext.Session.GetInt32("UserID")">
+                                @accessor.HttpContext.Session.GetString("UserName")'s Profile
+                            </a>
+
                                 <a class="btn btn-outline-danger" asp-area="" asp-controller="Login" asp-action="Logout">
                                     @accessor.HttpContext.Session.GetString("UserName") Log Out!
                                 </a>
