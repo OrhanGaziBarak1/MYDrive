@@ -26,17 +26,35 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Mail)
         </dd>
-        <dt class = "col-sm-2">
+@*        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Password)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Password)
-        </dd>
+        </dd>*@
         <dt class = "col-sm-2">
             Role Name
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Role.RoleName)
+        </dd>
+        <dt class="col-sm-2">
+            Create
+        </dt>
+        <dd class="col-sm-10">
+            @ViewBag.UserAuthorityValues.Create
+        </dd>
+        <dt class="col-sm-2">
+            Read
+        </dt>
+        <dd class="col-sm-10">
+            @ViewBag.UserAuthorityValues.Read
+        </dd>
+        <dt class="col-sm-2">
+            Write
+        </dt>
+        <dd class="col-sm-10">
+            @ViewBag.UserAuthorityValues.Write
         </dd>
     </dl>
     <div style="display:flex; justify-content:space-between; margin-top:15px;">

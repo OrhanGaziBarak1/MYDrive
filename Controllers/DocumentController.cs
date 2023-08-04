@@ -14,7 +14,6 @@ namespace DriveUI.Controllers
     public class DocumentController : Controller
     {
         DocumentManager documentManager = new DocumentManager(new EFDocumentDal());
-        //DocumentTypeManager documentTypeManager = new DocumentTypeManager(new EFDocumentTypeDal());
         FolderManager folderManager = new FolderManager(new EFFolderDal());
 
         Context context = new Context();
@@ -29,14 +28,6 @@ namespace DriveUI.Controllers
                                                      Text = x.FolderName,
                                                      Value = x.FolderID.ToString()
                                                  }).ToList();
-            //List<SelectListItem> documentTypeValues = (from x in documentTypeManager.GetDocumentTypes()
-            //                                           select new SelectListItem
-            //                                           {
-            //                                               Text = x.DocumentTypeName,
-            //                                               Value = x.DocumentTypeID.ToString()
-            //                                           }).ToList();
-
-            //ViewBag.DocumentTypes = documentTypeValues;
             ViewBag.Folders = folderValues;
 
             return View(documents);
@@ -56,7 +47,6 @@ namespace DriveUI.Controllers
             string newFileName = Guid.NewGuid().ToString();
 
             var folderValues = context.Folders.FirstOrDefault(x => x.FolderName == "root");
-            //var documentType = context.DocumentTypes.FirstOrDefault(x => x.DocumentTypeName == "boş");
 
             try
             {
@@ -99,14 +89,6 @@ namespace DriveUI.Controllers
                                                      Text = x.FolderName,
                                                      Value = x.FolderID.ToString()
                                                  }).ToList();
-            //List<SelectListItem> documentTypeValues = (from x in documentTypeManager.GetDocumentTypes()
-            //                                           select new SelectListItem
-            //                                           {
-            //                                               Text = x.DocumentTypeName,
-            //                                               Value = x.DocumentTypeID.ToString()
-            //                                           }).ToList();
-
-            //ViewBag.DocumentTypes = documentTypeValues;
             ViewBag.Folders = folderValues;
 
             return View(documentValues);
@@ -121,13 +103,6 @@ namespace DriveUI.Controllers
                                                      Text = x.FolderName,
                                                      Value = x.FolderID.ToString()
                                                  }).ToList();
-            //List<SelectListItem> documentTypeValues = (from x in documentTypeManager.GetDocumentTypes()
-            //                                           select new SelectListItem
-            //                                           {
-            //                                               Text = x.DocumentTypeName,
-            //                                               Value = x.DocumentTypeID.ToString()
-            //                                           }).ToList();
-            //ViewBag.DocumentTypes = documentTypeValues;
             ViewBag.Folders = folderValues;
             return View();
         }
@@ -172,13 +147,6 @@ namespace DriveUI.Controllers
                                                      Text = x.FolderName,
                                                      Value = x.FolderID.ToString()
                                                  }).ToList();
-            //List<SelectListItem> documentTypeValues = (from x in documentTypeManager.GetDocumentTypes()
-            //                                           select new SelectListItem
-            //                                           {
-            //                                               Text = x.DocumentTypeName,
-            //                                               Value = x.DocumentTypeID.ToString()
-            //                                           }).ToList();
-            //ViewBag.DocumentTypes = documentTypeValues;
             ViewBag.Folders = folderValues;
 
             return View(documentValues);

@@ -15,7 +15,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
+            <div class="container-sm">
                 <div style="display:flex; align-items:center; width:32%;">
                     <img src="~/eti-maden-logo.jpg" style="width:30%; height:30%" />
                     <p class="navbar-brand">Drive</p>
@@ -24,7 +24,7 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse justify-content-lg-start">
+                <div class="navbar-collapse collapse justify-content-between">
                     @if (accessor.HttpContext.Session.GetString("UserRole") != null && accessor.HttpContext.Session.GetString("UserRole") == "Admin")
                     {
                         <ul class="navbar-nav flex-grow-0">

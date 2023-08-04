@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
@@ -14,6 +15,8 @@ namespace DriveUI.Controllers
     {
         UserManager userManager = new UserManager(new EFUserDal());
         RoleManager roleManager = new RoleManager(new EFRoleDal());
+
+        Context context = new Context();
         public IActionResult GetUsers()
         {
             var users = userManager.GetUsers();
@@ -23,6 +26,8 @@ namespace DriveUI.Controllers
         public IActionResult UserDetails(int id)
         {
             var userValues = userManager.GetByID(id);
+            var userAuthorityValues = context.UserAuthorities.FirstOrDefault(x => x.UserID == userValues.UserID);
+            ViewBag.UserAuthorityValues = userAuthorityValues;
             return View(userValues);
         }
 
