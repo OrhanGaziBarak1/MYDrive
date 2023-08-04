@@ -1,0 +1,59 @@
+﻿@using EntityLayer.Concrete
+@model List<UserAuthority>
+
+<div style="display:flex; justify-content:center;">
+
+    <a href="/UserAuthority/AddUserAuthority" class="btn btn-outline-secondary" style="display:flex; align-items:center;">
+        <span class="material-symbols-outlined">
+            add_circle
+        </span>
+        New User Authority
+    </a>
+</div>
+
+<br />
+
+<table class="table table-striped table-hover text-center">
+    <tr>
+        <th>Read</th>
+        <th>Create</th>
+        <th>Write</th>
+        <th>User Name</th>
+        <th>Role Name</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Read</td>
+            <td>@item.Create</td>
+            <td>@item.Write</td>
+            <td>@item.User.UserName</td>
+            <td>@item.Role.RoleName</td>
+            <td>
+                <div style="display:flex; justify-content:space-evenly;">
+                    <a href="/UserAuthority/UserAuthorityUpdate/@item.UserAuthorityID" class="btn btn-outline-primary" style="display:flex; align-items:center;">
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                        Edit
+                    </a>
+                    <a href="/UserAuthority/UserAuthorityDetails/@item.UserAuthorityID" class="btn btn-outline-info" style="display:flex; align-items:center;">
+                        <span class="material-symbols-outlined">
+                            info_i
+                        </span>
+                        Details
+                    </a>
+                    <a href="/UserAuthority/RemoveUserAuthoirty/@item.UserAuthorityID" class="btn btn-outline-danger" style="display:flex; align-items:center;">
+                        <span class="material-symbols-outlined">
+                            delete
+                        </span>
+                        Delete
+                    </a>
+                </div>
+
+            </td>
+        </tr>
+    }
+</table>

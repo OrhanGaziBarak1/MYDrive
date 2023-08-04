@@ -1,0 +1,36 @@
+﻿@model EntityLayer.Concrete.RoleAuthority
+
+@{
+    ViewData["Title"] = "Role Authority Update";
+}
+
+<h1>Role Authority Update</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-4" style="margin:auto">
+        <form asp-action="RoleAuthorityUpdate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label asp-for="RoleAuthorityID" class="control-label" hidden>ID</label>
+                <input asp-for="RoleAuthorityID" class="form-control" hidden/>
+                <span asp-validation-for="RoleAuthorityID" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label asp-for="FolderID" class="control-label">Folder Name</label>
+                @Html.DropDownListFor(x => x.FolderID, (List<SelectListItem>)ViewBag.Folders, new {@class = "form-control"})
+                <span asp-validation-for="FolderID" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label asp-for="RoleID" class="control-label">Role Name</label>
+                @Html.DropDownListFor(x => x.RoleID, (List<SelectListItem>)ViewBag.Roles, new {@class = "form-control"})
+                <span asp-validation-for="RoleID" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:flex; justify-content:space-between">
+                <input type="submit" value="Update" class="btn btn-primary" />
+                <a asp-action="GetRoleAuthorities" class="btn btn-light">Back To Role Authorities</a>
+            </div>
+        </form>
+    </div>
+</div>
+

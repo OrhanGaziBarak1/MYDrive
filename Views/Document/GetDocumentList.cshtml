@@ -1,0 +1,73 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Document>
+
+@{
+    ViewData["Title"] = "Get Document List";
+}
+
+<div style="display:flex; justify-content:center;">
+    <a href="/Document/Upload" class="btn btn-outline-secondary" style="display:flex; align-items:center;">
+        <span class="material-symbols-outlined">
+            add_circle
+        </span>
+        New Document
+    </a>
+</div>
+
+<br />
+
+<table class="table table-hover table-striped text-center">
+    <thead>
+        <tr>
+            <th>
+                Document Name
+            </th>
+            <th>
+                Folder Name
+            </th>
+@*            <th>
+                Document Type Name
+            </th>*@
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DocumentName)
+                </td>
+                <td>
+                    @Html.DropDownListFor(modelItem => item.FolderID, (List<SelectListItem>)ViewBag.Folders,new {@class = "form-control", disabled = "true"})
+                </td>
+@*                <td>
+                    @Html.DropDownListFor(modelItem => item.DocumentTypeID, (List<SelectListItem>)ViewBag.DocumentTypes,new {@class = "form-control", disabled = "true"})
+                </td>*@
+                <td>
+                    <div style="display:flex; justify-content:space-evenly;">
+                        <a href="/Document/DocumentUpdate/@item.DocumentID" class="btn btn-outline-primary" style="display:flex; align-items:center;">
+                            <span class="material-symbols-outlined">
+                                edit
+                            </span>
+                            Edit
+                        </a>
+                        <a href="/Document/DocumentDetailsView/@item.DocumentID" class="btn btn-outline-info" style="display:flex; align-items:center;">
+                            <span class="material-symbols-outlined">
+                                info_i
+                            </span>
+                            Details
+                        </a>
+                        <a href="/Document/DeleteDocument/@item.DocumentID" class="btn btn-outline-danger" style="display:flex; align-items:center;">
+                            <span class="material-symbols-outlined">
+                                delete
+                            </span>
+                            Delete
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

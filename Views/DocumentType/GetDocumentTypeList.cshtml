@@ -1,0 +1,55 @@
+﻿@*@using EntityLayer.Concrete
+@model List<DocumentType>
+
+<div style="display:flex; justify-content:center;">
+
+    <a href="/DocumentType/AddDocumentType" class="btn btn-outline-secondary" style="display:flex; align-items:center;">
+        <span class="material-symbols-outlined">
+            add_circle
+        </span>
+        New Document Type
+    </a>
+</div>
+
+<br />
+
+<table class="table table-striped table-hover text-center">
+
+    <tr>
+        <th>ID</th>
+        <th>Document Type Name</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.DocumentTypeID</td>
+            <td>@item.DocumentTypeName</td>
+            <td>
+                <div style="display:flex; justify-content:space-evenly;">
+                    <a href="/DocumentType/DocumentTypeUpdate/@item.DocumentTypeID" class="btn btn-outline-primary" style="display:flex; align-items:center;">
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                        Edit
+                    </a>
+                    <a href="/DocumentType/DocumentTypeDetailsView/@item.DocumentTypeID" class="btn btn-outline-info" style="display:flex; align-items:center;">
+                        <span class="material-symbols-outlined">
+                            info_i
+                        </span>
+                        Details
+                    </a>
+                    <a href="/DocumentType/DocumentTypeRemove/@item.DocumentTypeID" class="btn btn-outline-danger" style="display:flex; align-items:center;">
+                        <span class="material-symbols-outlined">
+                            delete
+                        </span>
+                        Delete
+                    </a>
+                </div>
+
+            </td>
+        </tr>
+    }
+
+</table>*@

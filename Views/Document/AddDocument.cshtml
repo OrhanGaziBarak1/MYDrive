@@ -1,0 +1,22 @@
+﻿@model EntityLayer.Concrete.Document
+
+<form class="form-group" method="post">
+    <div style="width:500px; height:auto;">
+        <input type="text" placeholder="Document Name" name="DocumentName" class="form-control" />
+        <p class="text-danger text-center">@Html.ValidationMessageFor(x => x.DocumentName)</p>
+    </div>
+
+@*    <div style="width:500px; height:auto;">
+        @Html.DropDownListFor(x => x.DocumentTypeID, (List<SelectListItem>)ViewBag.DocumentTypes, new {@class = "form-control"})
+        <p class="text-danger text-center">@Html.ValidationMessageFor(x => x.DocumentTypeID)</p>
+    </div>*@
+
+    <div style="width:500px; height:auto;">
+        @Html.DropDownListFor(x => x.FolderID, (List<SelectListItem>)ViewBag.Folders, new {@class = "form-control"})
+        <p class="text-danger text-center">@Html.ValidationMessageFor(x => x.FolderID)</p>
+    </div>
+    <div style="display:flex; justify-content:space-between;">
+        <button class="btn btn-primary">Add</button>
+        <a class="btn btn-light" asp-action="Upload">Upload</a>
+    </div>
+</form>

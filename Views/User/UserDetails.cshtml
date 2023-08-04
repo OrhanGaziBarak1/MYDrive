@@ -1,0 +1,46 @@
+﻿@model EntityLayer.Concrete.User
+
+@{
+    ViewData["Title"] = "User Details";
+}
+
+<h1>@Model.UserName's Details</h1>
+<hr />
+<div>
+    <dl class="row">
+        <dt class = "col-sm-2">
+            User ID
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+        <dt class = "col-sm-2">
+            User Name
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Mail)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Mail)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+        <dt class = "col-sm-2">
+            Role Name
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Role.RoleName)
+        </dd>
+    </dl>
+    <div style="display:flex; justify-content:space-between; margin-top:15px;">
+        <a href="/User/UserUpdate/@Model.UserID" class="btn btn-primary">Update</a>
+        <a asp-action="GetUsers" class="btn btn-light">Back to List</a>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+﻿@model EntityLayer.Concrete.User
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+<div class="row">
+    <div class="col-md-4" style="margin:auto">
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label asp-for="Mail" class="control-label">Mail</label>
+                <input asp-for="Mail" class="form-control" />
+                <span asp-validation-for="Mail" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label asp-for="Password" class="control-label">Password</label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <p class="text-center text-danger">@TempData["loginInformationsLogin"]</p>
+            <p class="text-center text-danger">@TempData["logout"]</p>
+            <p class="text-center text-success">@TempData["registerSuccess"]</p>
+            <div class="form-group" style="display:flex; justify-content:space-between">
+                <input type="submit" value="Login" class="btn btn-primary" />
+                <a href="/Login/Register" class="btn btn-light">Register</a>
+            </div>
+        </form>
+    </div>
+</div>

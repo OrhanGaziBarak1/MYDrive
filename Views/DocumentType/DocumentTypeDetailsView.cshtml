@@ -1,0 +1,31 @@
+﻿@*@model EntityLayer.Concrete.DocumentType
+
+@{
+    ViewData["Title"] = "Document Type Details";
+}
+
+<h1>@Model.DocumentTypeName's Details</h1>
+
+<div>
+    <h4>DocumentType</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Document Type ID
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DocumentTypeID)
+        </dd>
+        <dt class = "col-sm-2">
+            Document Type Name
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DocumentTypeName)
+        </dd>
+    </dl>
+    <div style="display:flex; justify-content:space-between; margin-top:15px;">
+        <a href="/DocumentType/DocumentTypeUpdate/@Model.DocumentTypeID" class="btn btn-primary">Update</a>
+        <a asp-action="GetDocumentTypeList" class="btn btn-light">Back to List</a>
+    </div>
+</div>
+*@

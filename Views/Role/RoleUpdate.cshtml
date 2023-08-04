@@ -1,0 +1,32 @@
+﻿@model EntityLayer.Concrete.Role
+
+@{
+    ViewData["Title"] = "Role Update";
+}
+
+<h1>Role Update</h1>
+<hr />
+<h2>@Html.DisplayFor(x => x.RoleName)</h2>
+
+<div class="row">
+    <div class="col-md-4" style="margin:auto">
+        <form asp-action="RoleUpdate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label asp-for="RoleID" class="control-label" hidden>ID</label>
+                <input asp-for="RoleID" class="form-control" hidden/>
+                <span asp-validation-for="RoleID" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label asp-for="RoleName" class="control-label">Name</label>
+                <input asp-for="RoleName" class="form-control" />
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:flex; justify-content:space-between">
+                <input type="submit" value="Update" class="btn btn-primary" />
+                <a asp-action="GetRoles" class="btn btn-light">Back To Documents</a>
+            </div>
+        </form>
+    </div>
+</div>
+

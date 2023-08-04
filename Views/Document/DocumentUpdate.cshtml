@@ -1,0 +1,41 @@
+﻿@model EntityLayer.Concrete.Document
+
+@{
+    ViewData["Title"] = "Document Update";
+}
+
+<h1>Document Update</h1>
+<hr />
+<h2>@Html.DisplayFor(x => x.DocumentName)</h2>
+<div class="row">
+    <div class="col-md-4" style="margin:auto">
+        <form asp-action="DocumentUpdate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label asp-for="DocumentID" class="control-label" hidden>ID</label>
+                <input asp-for="DocumentID" class="form-control" hidden />
+                <span asp-validation-for="DocumentID" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label asp-for="DocumentName" class="control-label">Name</label>
+                <input asp-for="DocumentName" class="form-control" />
+                <span asp-validation-for="DocumentName" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label asp-for="FolderID" class="control-label">Folder Name</label>
+                @Html.DropDownListFor(x => x.FolderID, (List<SelectListItem>)ViewBag.Folders, new {@class = "form-control"})
+                <span asp-validation-for="FolderID" class="text-danger"></span>
+            </div>
+            @*                <div class="form-group" style="margin-bottom:15px;">
+            <label asp-for="DocumentTypeID" class="control-label">Document Type Name</label>
+            @Html.DropDownListFor(x => x.DocumentTypeID, (List<SelectListItem>)ViewBag.DocumentTypes, new {@class = "form-control"})
+            <span asp-validation-for="DocumentTypeID" class="text-danger"></span>
+            </div>*@
+            <div class="form-group" style="display:flex; justify-content:space-between">
+                <input type="submit" value="Update" class="btn btn-primary" />
+                <a asp-action="GetDocumentList" class="btn btn-light">Back To Documents</a>
+            </div>
+        </form>
+    </div>
+</div>
+

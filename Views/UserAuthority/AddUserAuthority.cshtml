@@ -1,0 +1,46 @@
+﻿@model EntityLayer.Concrete.UserAuthority
+
+@{
+    ViewData["Title"] = "Add User Authority";
+}
+
+<h1>Add User Authority</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-4" style="margin:auto">
+        <form asp-action="AddUserAuthority">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group form-check" style="margin-bottom:15px;">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Read" /> Is Read?
+                </label>
+            </div>
+            <div class="form-group form-check" style="margin-bottom:15px;">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Create" /> Is Create?
+                </label>
+            </div>
+            <div class="form-group form-check" style="margin-bottom:15px;">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Write" /> Is Write?
+                </label>
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label asp-for="UserID" class="control-label">User Name</label>
+                @Html.DropDownListFor(x => x.UserID, (List<SelectListItem>)ViewBag.Users, new {@class = "form-control"})
+                <span asp-validation-for="UserID" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label asp-for="RoleID" class="control-label">Role Name</label>
+                @Html.DropDownListFor(x => x.RoleID, (List<SelectListItem>)ViewBag.Roles, new {@class = "form-control"})
+                <span asp-validation-for="RoleID" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:flex; justify-content:space-between">
+                <input type="submit" value="Add" class="btn btn-primary" />
+                <a asp-action="GetUserAuthorities" class="btn btn-light">Back To User Authorities</a>
+            </div>
+        </form>
+    </div>
+</div>
+

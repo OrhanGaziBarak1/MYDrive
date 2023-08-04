@@ -1,0 +1,42 @@
+﻿@model EntityLayer.Concrete.Document
+
+@{
+    ViewData["Title"] = "Document Deatils View";
+}
+
+<h1>@Model.DocumentName's Deatils</h1>
+<hr />
+
+<div>
+
+    <dl class="row" >
+        <dt class="col-sm-2">
+            Document ID
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DocumentID)
+        </dd>
+        <dt class="col-sm-2">
+            Document Name
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DocumentName)
+        </dd>
+        <dt class="col-sm-2">
+            Folder Name
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DropDownListFor(model => model.FolderID, (List<SelectListItem>)ViewBag.Folders,new {@class = "form-control", disabled = "true"})
+        </dd>
+        <dt class="col-sm-2">
+            Document Type Name
+        </dt>
+@*        <dd class="col-sm-10">
+            @Html.DropDownListFor(model => model.DocumentTypeID, (List<SelectListItem>)ViewBag.DocumentTypes,new {@class = "form-control", disabled = "true"})
+        </dd>*@
+    </dl>
+    <div style="display:flex; justify-content:space-between; margin-top:15px;">
+        <a href="/Document/DocumentUpdate/@Model.DocumentID" class="btn btn-primary">Update</a>
+        <a asp-action="GetDocumentList" class="btn btn-light">Back to List</a>
+    </div>
+</div>

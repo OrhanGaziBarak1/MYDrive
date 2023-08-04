@@ -1,0 +1,11 @@
+﻿<div style="display:flex; align-items:center; justify-content:center">
+    <form class="form-group align-items-center" enctype="multipart/form-data" method="post" asp-controller="Document" asp-action="Upload">
+        <input type="file" name="file" class="form-control" style="width:500px; margin-bottom:15px;" multiple/>
+        <button type="submit" class="btn btn-primary">Upload File</button>
+        @if(TempData["FileUploadSuccess"] != null || TempData["FileType"] != null)
+        {
+            <h1 class="text-success">@TempData["FileUploadSuccess"]</h1>
+            <h1 class="text-success">@TempData["FileType"]</h1>
+        }
+    </form>
+</div>
