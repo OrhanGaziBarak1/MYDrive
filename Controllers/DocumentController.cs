@@ -35,8 +35,16 @@ namespace DriveUI.Controllers
                                                      Value = x.FolderID.ToString()
                                                  }).ToList();
             ViewBag.Folders = folderValues;
-
             return View(documents);
+        }
+        public IActionResult GetDocumentListByRole(int id)
+        {
+            var user = context.Users.FirstOrDefault(x => x.UserID == id);
+            string userRole = "";
+            if (user != null)
+                userRole += user.Role.RoleName;
+            var documentsByRole = context.Documents.Where(x => x.Folder.FolderName == userRole);
+            return View(documentsByRole);
         }
         [HttpGet]
         public IActionResult Upload()
@@ -59,28 +67,18 @@ namespace DriveUI.Controllers
             string[] fileType = file.ContentType.Split("/");
             string newFileName = Guid.NewGuid().ToString();
 
-            //var folderValues = context.Folders.FirstOrDefault(x => x.FolderName == "root");
-
-            //Document newDocument = new Document();
-
             document.DocumentName = oldFileName;
-            //newDocument.FolderID = folderValues.FolderID;
             document.Guid = newFileName;
             document.DocumentType = fileType[1];
-
-            //documentManager.DocumentAdd(document);
 
             int folderID = document.FolderID;
 
             var folderValues = context.Folders.FirstOrDefault(x => x.FolderID == folderID);
-            //if (folderValues != null)
-            //    TempData["FolderPath"] = webHostEnvironment.WebRootPath + folderValues.FolderName;
 
             if (folderValues != null)
                 try
                 {
                     path = Path.Combine(Environment.CurrentDirectory, "Upload", folderValues.FolderName);
-                    TempData["FolderPath"] = path;
                     if (!Directory.Exists(path))
                     {
                         Directory.CreateDirectory(path);
@@ -152,6 +150,20 @@ namespace DriveUI.Controllers
         public IActionResult DeleteDocument(int id)
         {
             var documentValue = documentManager.GetByID(id);
+            int folderID = documentValue.FolderID;
+            var folderValues = context.Folders.FirstOrDefault(x => x.FolderID == folderID);
+            string filePath = "";
+
+            if (folderValues != null)
+            {
+                filePath += Path.Combine(webHostEnvironment.WebRootPath, "Upload", folderValues.FolderName, documentValue.Guid);
+            }
+
+            //if(System.IO.File.Exists(filePath))
+            //{
+            //    System.IO.File.Delete(filePath);
+            //}
+
             documentManager.DocumentRemove(documentValue);
             return RedirectToAction("GetDocumentList");
         }

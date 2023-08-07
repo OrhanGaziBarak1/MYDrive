@@ -37,6 +37,9 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Document" asp-action="GetDocumentList">Documents</a>
                             </li>
+                            @*                            <li class="nav-item">
+                        <a class="nav-link text-dark" href="/Document/GetDocumentList/@accessor.HttpContext.Session.GetInt32("UserID")">Documents</a>
+                        </li>*@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="GetRoles">Roles</a>
                             </li>
@@ -51,23 +54,26 @@
                     @if (accessor.HttpContext.Session.GetString("UserRole") != null && (accessor.HttpContext.Session.GetString("UserRole") != "Admin" && accessor.HttpContext.Session.GetString("UserRole") != "No Role"))
                     {
                         <ul class="navbar-nav flex-grow-0">
+                            @*                            <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Document" asp-action="GetDocumentList">Documents</a>
+                        </li>*@
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Document" asp-action="GetDocumentList">Documents</a>
+                                <a class="nav-link text-dark" href="/Document/GetDocumentList/@accessor.HttpContext.Session.GetInt32("UserID")">Documents</a>
                             </li>
                         </ul>
                     }
-                        @if (accessor.HttpContext.Session.GetString("UserName") != null)
-                        {
-                            <div class="nav-item text-dark" style="display:flex; align-items:center;">
+                    @if (accessor.HttpContext.Session.GetString("UserName") != null)
+                    {
+                        <div class="nav-item text-dark" style="display:flex; align-items:center;">
                             <a style="margin-right:15px;" class="btn btn-outline-success text-success" href="/Login/MyProfile/@accessor.HttpContext.Session.GetInt32("UserID")">
                                 @accessor.HttpContext.Session.GetString("UserName")'s Profile
                             </a>
 
-                                <a class="btn btn-outline-danger" asp-area="" asp-controller="Login" asp-action="Logout">
-                                    @accessor.HttpContext.Session.GetString("UserName") Log Out!
-                                </a>
-                            </div>
-                        }
+                            <a class="btn btn-outline-danger" asp-area="" asp-controller="Login" asp-action="Logout">
+                                @accessor.HttpContext.Session.GetString("UserName") Log Out!
+                            </a>
+                        </div>
+                    }
                 </div>
             </div>
         </nav>
