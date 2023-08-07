@@ -22,7 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Upload\" />
+    <Folder Include="Upload\Finance\" />
+    <Folder Include="Upload\root\" />
+    <Folder Include="Upload\Software\" />
   </ItemGroup>
 
 </Project>

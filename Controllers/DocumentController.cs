@@ -15,8 +15,14 @@ namespace DriveUI.Controllers
     {
         DocumentManager documentManager = new DocumentManager(new EFDocumentDal());
         FolderManager folderManager = new FolderManager(new EFFolderDal());
+        private readonly IWebHostEnvironment webHostEnvironment;
 
         Context context = new Context();
+
+        public DocumentController(IWebHostEnvironment webHostEnvironment)
+        {
+            this.webHostEnvironment = webHostEnvironment;
+        }
 
         public IActionResult GetDocumentList()
         {
@@ -35,48 +41,62 @@ namespace DriveUI.Controllers
         [HttpGet]
         public IActionResult Upload()
         {
+            List<SelectListItem> folderValues = (from x in folderManager.GetFolders()
+                                                 select new SelectListItem
+                                                 {
+                                                     Text = x.FolderName,
+                                                     Value = x.FolderID.ToString()
+                                                 }).ToList();
+            ViewBag.Folders = folderValues;
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Upload(IFormFile file)
+        public async Task<IActionResult> Upload(IFormFile file, Document document)
         {
             string path;
             string oldFileName = file.FileName;
             string[] fileType = file.ContentType.Split("/");
             string newFileName = Guid.NewGuid().ToString();
 
-            var folderValues = context.Folders.FirstOrDefault(x => x.FolderName == "root");
+            //var folderValues = context.Folders.FirstOrDefault(x => x.FolderName == "root");
 
-            try
-            {
-                path = Path.Combine(Environment.CurrentDirectory, "Upload");
-                if (!Directory.Exists(path))
+            //Document newDocument = new Document();
+
+            document.DocumentName = oldFileName;
+            //newDocument.FolderID = folderValues.FolderID;
+            document.Guid = newFileName;
+            document.DocumentType = fileType[1];
+
+            //documentManager.DocumentAdd(document);
+
+            int folderID = document.FolderID;
+
+            var folderValues = context.Folders.FirstOrDefault(x => x.FolderID == folderID);
+            //if (folderValues != null)
+            //    TempData["FolderPath"] = webHostEnvironment.WebRootPath + folderValues.FolderName;
+
+            if (folderValues != null)
+                try
                 {
-                    Directory.CreateDirectory(path);
+                    path = Path.Combine(Environment.CurrentDirectory, "Upload", folderValues.FolderName);
+                    TempData["FolderPath"] = path;
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+                    using (var fileStream = new FileStream(Path.Combine(path, newFileName), FileMode.Create))
+                    {
+                        await file.CopyToAsync(fileStream);
+                        TempData["FileUploadSuccess"] = "File upload success.";
+                    }
                 }
-                using (var fileStream = new FileStream(Path.Combine(path, newFileName), FileMode.Create))
+                catch (Exception ex)
                 {
-                    await file.CopyToAsync(fileStream);
-                    TempData["FileUploadSuccess"] = "File upload success.";
+                    throw new Exception("File upload failed.", ex);
                 }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("File upload failed.", ex);
-            }
-
-            Document newDocument = new Document();
-
-            newDocument.DocumentName = oldFileName;
-            newDocument.FolderID = folderValues.FolderID;
-            newDocument.Guid = newFileName;
-            newDocument.DocumentType = fileType[1];
-
-            documentManager.DocumentAdd(newDocument);
-
-
-            return View();
+            documentManager.DocumentAdd(document);
+            return RedirectToAction("Upload");
         }
 
         public IActionResult DocumentDetailsView(int id)

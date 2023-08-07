@@ -1,11 +1,20 @@
-﻿<div style="display:flex; align-items:center; justify-content:center">
+﻿@model EntityLayer.Concrete.Document
+
+<div style="display:flex; align-items:center; justify-content:center">
     <form class="form-group align-items-center" enctype="multipart/form-data" method="post" asp-controller="Document" asp-action="Upload">
-        <input type="file" name="file" class="form-control" style="width:500px; margin-bottom:15px;" multiple/>
-        <button type="submit" class="btn btn-primary">Upload File</button>
-        @if(TempData["FileUploadSuccess"] != null || TempData["FileType"] != null)
+        <input type="file" name="file" class="form-control" style="width:500px; margin-bottom:15px;" multiple />
+
+        <div class="form-group" style="margin-bottom:15px;">
+            <label asp-for="FolderID" class="control-label">Folder Name</label>
+            @Html.DropDownListFor(x => x.FolderID, (List<SelectListItem>)ViewBag.Folders, new {@class = "form-control"})
+            <span asp-validation-for="FolderID" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="margin-bottom:15px;">Upload File</button>
+
+        @if (TempData["FileUploadSuccess"] != null)
         {
             <h1 class="text-success">@TempData["FileUploadSuccess"]</h1>
-            <h1 class="text-success">@TempData["FileType"]</h1>
         }
     </form>
 </div>
