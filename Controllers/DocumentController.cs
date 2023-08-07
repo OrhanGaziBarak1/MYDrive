@@ -7,6 +7,7 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Data.Entity;
 
 namespace DriveUI.Controllers
 {
@@ -37,13 +38,18 @@ namespace DriveUI.Controllers
             ViewBag.Folders = folderValues;
             return View(documents);
         }
-        public IActionResult GetDocumentListByRole(int id)
+        public IActionResult GetDocumentListByRole(int id/*, string searchTerm*/)
         {
             var user = context.Users.FirstOrDefault(x => x.UserID == id);
             string userRole = "";
             if (user != null)
                 userRole += user.Role.RoleName;
             var documentsByRole = context.Documents.Where(x => x.Folder.FolderName == userRole);
+            //if(!string.IsNullOrEmpty(searchTerm))
+            //{
+            //    documentsByRole = documentsByRole.Where(s => s.DocumentName.Contains(searchTerm));
+            //    documentsByRole.ToList();
+            //}
             return View(documentsByRole);
         }
         [HttpGet]
