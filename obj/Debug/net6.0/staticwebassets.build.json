@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "YXeJiEVhO9T1OYeyf9A8Hrnz4dGNeWodDiNJnYR98Xs=",
+  "Hash": "TiSWL07VH00AyN/FEeiKEdortG9y0i5DUkRzOONVTDo=",
   "Source": "DriveUI",
   "BasePath": "_content/DriveUI",
   "Mode": "Default",
@@ -1120,6 +1120,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\OrhanGaziBarakCV.html"
+    },
+    {
+      "Identity": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\Upload\\Software\\9ca27cdf-ff04-425a-8cfb-c758562017c4",
+      "SourceId": "DriveUI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\",
+      "BasePath": "_content/DriveUI",
+      "RelativePath": "Upload/Software/9ca27cdf-ff04-425a-8cfb-c758562017c4",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Upload\\Software\\9ca27cdf-ff04-425a-8cfb-c758562017c4"
+    },
+    {
+      "Identity": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\Upload\\Software\\a3e1a125-e461-4b09-b637-ff8d88aeb32a",
+      "SourceId": "DriveUI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\",
+      "BasePath": "_content/DriveUI",
+      "RelativePath": "Upload/Software/a3e1a125-e461-4b09-b637-ff8d88aeb32a",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Upload\\Software\\a3e1a125-e461-4b09-b637-ff8d88aeb32a"
     }
   ]
 }

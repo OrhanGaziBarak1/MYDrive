@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data.Entity;
+using static NuGet.Packaging.PackagingConstants;
 
 namespace DriveUI.Controllers
 {
@@ -25,9 +26,9 @@ namespace DriveUI.Controllers
             this.webHostEnvironment = webHostEnvironment;
         }
 
-        public IActionResult GetDocumentList()
+        public async Task<IActionResult> GetDocumentList(string searchTerm)
         {
-            var documents = documentManager.GetDocuments();
+            var documents = from doc in context.Documents select doc;
 
             List<SelectListItem> folderValues = (from x in folderManager.GetFolders()
                                                  select new SelectListItem
@@ -35,11 +36,14 @@ namespace DriveUI.Controllers
                                                      Text = x.FolderName,
                                                      Value = x.FolderID.ToString()
                                                  }).ToList();
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                documents = documents.Where(s => s.DocumentName.Contains(searchTerm));
+            }
             ViewBag.Folders = folderValues;
-            return View(documents);
+            return View(await documents.ToListAsync());
         }
 
-        
         public async Task<IActionResult> GetDocumentListByRole(int id, string searchTerm)
         {
             var user = context.Users.FirstOrDefault(x => x.UserID == id);
@@ -72,12 +76,12 @@ namespace DriveUI.Controllers
         {
             string path;
             string oldFileName = file.FileName;
-            string[] fileType = file.ContentType.Split("/");
+            string fileType = file.ContentType;
             string newFileName = Guid.NewGuid().ToString();
 
             document.DocumentName = oldFileName;
             document.Guid = newFileName;
-            document.DocumentType = fileType[1];
+            document.DocumentType = fileType;
 
             int folderID = document.FolderID;
 
@@ -86,7 +90,7 @@ namespace DriveUI.Controllers
             if (folderValues != null)
                 try
                 {
-                    path = Path.Combine(Environment.CurrentDirectory, "Upload", folderValues.FolderName);
+                    path = Path.Combine("wwwroot\\Upload\\", folderValues.FolderName);
                     if (!Directory.Exists(path))
                     {
                         Directory.CreateDirectory(path);
@@ -164,19 +168,17 @@ namespace DriveUI.Controllers
 
             if (folderValues != null)
             {
-                filePath += Path.Combine(webHostEnvironment.WebRootPath, "Upload", folderValues.FolderName, documentValue.Guid);
+                filePath += Path.Combine("wwwroot\\Upload\\", folderValues.FolderName, documentValue.Guid);
             }
 
-            //if(System.IO.File.Exists(filePath))
-            //{
-            //    System.IO.File.Delete(filePath);
-            //}
+
+            if (System.IO.File.Exists(filePath))
+                System.IO.File.Delete(filePath);
 
             documentManager.DocumentRemove(documentValue);
             return RedirectToAction("GetDocumentList");
         }
         [HttpGet]
-
         public IActionResult DocumentUpdate(int id)
         {
             var documentValues = documentManager.GetByID(id);
@@ -193,7 +195,6 @@ namespace DriveUI.Controllers
         }
 
         [HttpPost]
-
         public IActionResult DocumentUpdate(Document document)
         {
             DocumentValidator validator = new DocumentValidator();
@@ -211,6 +212,30 @@ namespace DriveUI.Controllers
                 }
             }
             return View();
+        }
+
+        public IActionResult DownloadFile(int id)
+        {
+            string documentPath = "";
+            var document = context.Documents.FirstOrDefault(doc => doc.DocumentID == id);
+            
+
+            if (document != null)
+            {
+                var folder = context.Folders.FirstOrDefault(folder => folder.FolderID == document.FolderID);
+                if (folder != null)
+                    documentPath += Path.Combine("wwwroot\\Upload\\", folder.FolderName, document.Guid);
+            }
+
+            if (document != null && documentPath != null)
+            {
+                return File(System.IO.File.ReadAllBytes(documentPath), document.DocumentType, document.DocumentName);
+            }
+            else
+            {
+                return Problem("Something happened... :'(");
+            }
+
         }
     }
 }

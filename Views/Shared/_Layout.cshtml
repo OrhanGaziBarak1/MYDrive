@@ -15,10 +15,10 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-sm">
-                <div style="display:flex; align-items:center; width:32%;">
-                    <img src="~/eti-maden-logo.jpg" style="width:30%; height:30%" />
-                    <p class="navbar-brand">Drive</p>
+            <div class="container-fluid">
+                <div style="display:flex; align-items:center; width:5%; margin-right:4%;">
+                    <img src="~/eti-maden-logo.jpg" style="width:120%; height:120%" />
+                    <p class="navbar-brand" style="margin-top:5%;">Drive</p>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -47,14 +47,6 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="UserAuthority" asp-action="GetUserAuthorities">User Authority</a>
                             </li>
                         </ul>
- @*                       <div>
-                            <form method="get" asp-action="GetDocumentList" asp-controller="Document" style="display:flex; align-items:center;">
-                                <span class="material-symbols-outlined" style="margin-right:15px;">
-                                    search
-                                </span>
-                                <input type="text" name="searchTerm" placeholder="Search..." class="form-control" />
-                            </form>
-                        </div>*@
                     }
                     @if (accessor.HttpContext.Session.GetString("UserRole") != null && (accessor.HttpContext.Session.GetString("UserRole") != "Admin" && accessor.HttpContext.Session.GetString("UserRole") != "No Role"))
                     {
@@ -63,18 +55,28 @@
                                 <a class="nav-link text-dark" href="/Document/GetDocumentListByRole/@accessor.HttpContext.Session.GetInt32("UserID")">Documents</a>
                             </li>
                         </ul>
-                        <div>
-                            <form method = "post" asp-action="GetDocumentListByRole" asp-controller="Document" style="display:flex; align-items:center;">
-                                <span class="material-symbols-outlined" style="margin-right:15px;">
-                                    search
-                                </span>
-                                <input type="text" name="searchTerm" placeholder="Search..." class="form-control" />
-                            </form>
-                        </div>
                     }
                     @if (accessor.HttpContext.Session.GetString("UserName") != null)
                     {
                         <div class="nav-item text-dark" style="display:flex; align-items:center;">
+                            @if (accessor.HttpContext.Session.GetString("UserRole") != "Admin")
+                            {
+                                <form method="post" asp-action="GetDocumentListByRole" asp-controller="Document" style="display:flex; align-items:center; margin-right:15px;">
+                                    <span class="material-symbols-outlined" style="margin-right:15px;">
+                                        search
+                                    </span>
+                                    <input type="text" name="searchTerm" placeholder="Search..." class="form-control" />
+                                </form>
+                            } else
+                            {
+                                <form method="post" asp-action="GetDocumentList" asp-controller="Document" style="display:flex; align-items:center; margin-right:15px;">
+                                    <span class="material-symbols-outlined" style="margin-right:15px;">
+                                        search
+                                    </span>
+                                    <input type="text" name="searchTerm" placeholder="Search..." class="form-control" />
+                                </form>
+                            }
+
                             <a style="margin-right:15px;" class="btn btn-outline-success text-success" href="/Login/MyProfile/@accessor.HttpContext.Session.GetInt32("UserID")">
                                 @accessor.HttpContext.Session.GetString("UserName")'s Profile
                             </a>
