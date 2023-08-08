@@ -37,9 +37,6 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Document" asp-action="GetDocumentList">Documents</a>
                             </li>
-                            @*                            <li class="nav-item">
-                        <a class="nav-link text-dark" href="/Document/GetDocumentList/@accessor.HttpContext.Session.GetInt32("UserID")">Documents</a>
-                        </li>*@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="GetRoles">Roles</a>
                             </li>
@@ -50,16 +47,24 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="UserAuthority" asp-action="GetUserAuthorities">User Authority</a>
                             </li>
                         </ul>
+ @*                       <div>
+                            <form method="get" asp-action="GetDocumentList" asp-controller="Document" style="display:flex; align-items:center;">
+                                <span class="material-symbols-outlined" style="margin-right:15px;">
+                                    search
+                                </span>
+                                <input type="text" name="searchTerm" placeholder="Search..." class="form-control" />
+                            </form>
+                        </div>*@
                     }
                     @if (accessor.HttpContext.Session.GetString("UserRole") != null && (accessor.HttpContext.Session.GetString("UserRole") != "Admin" && accessor.HttpContext.Session.GetString("UserRole") != "No Role"))
                     {
                         <ul class="navbar-nav flex-grow-0">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="/Document/GetDocumentList/@accessor.HttpContext.Session.GetInt32("UserID")">Documents</a>
+                                <a class="nav-link text-dark" href="/Document/GetDocumentListByRole/@accessor.HttpContext.Session.GetInt32("UserID")">Documents</a>
                             </li>
                         </ul>
                         <div>
-                            <form method = "get" asp-action="GetDocumentListByRole" asp-controller="Document" style="display:flex; align-items:center;">
+                            <form method = "post" asp-action="GetDocumentListByRole" asp-controller="Document" style="display:flex; align-items:center;">
                                 <span class="material-symbols-outlined" style="margin-right:15px;">
                                     search
                                 </span>

@@ -22,9 +22,6 @@
                 Document Name
             </th>
             <th>
-                Folder Name
-            </th>
-            <th>
                 Actions
             </th>
         </tr>
@@ -35,9 +32,6 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.DocumentName)
-                </td>
-                <td>
-                    @Html.DropDownListFor(modelItem => item.FolderID, (List<SelectListItem>)ViewBag.Folders,new {@class = "form-control", disabled = "true"})
                 </td>
                 <td>
                     <div style="display:flex; justify-content:space-evenly;">

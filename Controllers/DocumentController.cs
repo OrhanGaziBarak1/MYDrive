@@ -38,20 +38,22 @@ namespace DriveUI.Controllers
             ViewBag.Folders = folderValues;
             return View(documents);
         }
-        public IActionResult GetDocumentListByRole(int id/*, string searchTerm*/)
+
+        
+        public async Task<IActionResult> GetDocumentListByRole(int id, string searchTerm)
         {
             var user = context.Users.FirstOrDefault(x => x.UserID == id);
             string userRole = "";
             if (user != null)
                 userRole += user.Role.RoleName;
             var documentsByRole = context.Documents.Where(x => x.Folder.FolderName == userRole);
-            //if(!string.IsNullOrEmpty(searchTerm))
-            //{
-            //    documentsByRole = documentsByRole.Where(s => s.DocumentName.Contains(searchTerm));
-            //    documentsByRole.ToList();
-            //}
-            return View(documentsByRole);
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                documentsByRole = documentsByRole.Where(s => s.DocumentName.Contains(searchTerm));
+            }
+            return View(await documentsByRole.ToListAsync());
         }
+
         [HttpGet]
         public IActionResult Upload()
         {
