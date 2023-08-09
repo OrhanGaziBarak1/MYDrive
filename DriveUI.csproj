@@ -22,10 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Upload\Finance\" />
     <Folder Include="wwwroot\Upload\root\" />
     <Folder Include="wwwroot\Upload\root\Software\Project 1\V1\" />
-    <Folder Include="wwwroot\Upload\Software\" />
   </ItemGroup>
 
 </Project>

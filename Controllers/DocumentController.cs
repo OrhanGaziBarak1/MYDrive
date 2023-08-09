@@ -16,14 +16,21 @@ namespace DriveUI.Controllers
     {
         DocumentManager documentManager = new DocumentManager(new EFDocumentDal());
         FolderManager folderManager = new FolderManager(new EFFolderDal());
-        private readonly IWebHostEnvironment webHostEnvironment;
+        private readonly IWebHostEnvironment? webHostEnvironment;
+        public readonly IHttpContextAccessor? accessor;
 
         Context context = new Context();
 
-        public DocumentController(IWebHostEnvironment webHostEnvironment)
+        public DocumentController(IWebHostEnvironment webHostEnvironment, IHttpContextAccessor accessor)
         {
             this.webHostEnvironment = webHostEnvironment;
+            this.accessor = accessor;
         }
+
+        //public DocumentController(IHttpContextAccessor accessor)
+        //{
+        //    this.accessor = accessor;
+        //}
 
         public async Task<IActionResult> GetDocumentList(string searchTerm)
         {
@@ -61,7 +68,7 @@ namespace DriveUI.Controllers
         [HttpGet]
         public IActionResult Upload()
         {
-            List<SelectListItem> folderValues = (from x in folderManager.GetFolders() 
+            List<SelectListItem> folderValues = (from x in folderManager.GetFolders()
                                                  where x.FolderName != "root"
                                                  select new SelectListItem
                                                  {
@@ -116,7 +123,16 @@ namespace DriveUI.Controllers
                 document.RoleID = role.RoleID;
 
             documentManager.DocumentAdd(document);
-            return RedirectToAction("Upload");
+
+            if (accessor.HttpContext.Session.GetString("UserRole") != null && accessor.HttpContext.Session.GetString("UserRole") == "Admin")
+            {
+                return RedirectToAction("GetDocumentList");
+            }
+            else
+            {
+                return RedirectToAction("GetDocumentListByRole");
+            }
+
         }
 
         public IActionResult DocumentDetailsView(int id)
@@ -171,16 +187,19 @@ namespace DriveUI.Controllers
 
         public IActionResult DeleteDocument(int id)
         {
-            var documentValue = documentManager.GetByID(id);
-            int folderID = documentValue.FolderID;
-            var folderValues = context.Folders.FirstOrDefault(x => x.FolderID == folderID);
+            string folderPath = "";
             string filePath = "";
 
-            if (folderValues != null)
-            {
-                filePath += Path.Combine("wwwroot\\Upload\\", folderValues.FolderName, documentValue.Guid);
-            }
+            var documentValue = documentManager.GetByID(id);
 
+            int folderID = documentValue.FolderID;
+
+            var folderValues = context.Folders.FirstOrDefault(x => x.FolderID == folderID);
+
+            if (folderValues != null)
+                folderPath = getFoldersPath(folderValues);
+
+            filePath += Path.Combine(folderPath, documentValue.Guid);
 
             if (System.IO.File.Exists(filePath))
                 System.IO.File.Delete(filePath);
@@ -196,7 +215,7 @@ namespace DriveUI.Controllers
             List<SelectListItem> folderValues = (from x in folderManager.GetFolders()
                                                  select new SelectListItem
                                                  {
-                                                     Text = x.FolderName,
+                                                     Text = getFoldersPath(x),
                                                      Value = x.FolderID.ToString()
                                                  }).ToList();
             ViewBag.Folders = folderValues;
@@ -207,21 +226,63 @@ namespace DriveUI.Controllers
         [HttpPost]
         public IActionResult DocumentUpdate(Document document)
         {
-            DocumentValidator validator = new DocumentValidator();
-            ValidationResult results = validator.Validate(document);
-            if (results.IsValid)
+            string sourceFolderPath = "wwwroot\\Upload\\";
+            string sourceAbsolutePath = "";
+
+            string destinationFolderPath = "wwwroot\\Upload\\";
+            string destinationAbsolutePath = "";
+            string[] splitedDestinationAbsolutePath;
+            string newDocumentRole;
+
+            var documentNowValues = context.Documents.FirstOrDefault(x => x.DocumentID == document.DocumentID);
+            var nowFolder = context.Folders.FirstOrDefault(x => x.FolderID == documentNowValues.FolderID);
+
+            if (documentNowValues != null)
             {
-                documentManager.DocumentUpdate(document);
+                if (nowFolder != null)
+                    sourceFolderPath += getFoldersPath(nowFolder);
+
+                sourceAbsolutePath = Path.Combine(sourceFolderPath, documentNowValues.Guid);
+            }
+
+            var destinationFolder = context.Folders.FirstOrDefault(x => x.FolderID == document.FolderID);
+
+            if (destinationFolder != null)
+                destinationFolderPath += getFoldersPath(destinationFolder);
+
+            if (!Directory.Exists(destinationFolderPath))
+            {
+                Directory.CreateDirectory(destinationFolderPath);
+
+            }
+
+            destinationAbsolutePath = Path.Combine(destinationFolderPath, document.Guid);
+
+            splitedDestinationAbsolutePath = destinationAbsolutePath.Split("\\");
+            newDocumentRole = splitedDestinationAbsolutePath[3];
+
+            var newRole = context.Roles.FirstOrDefault(x => x.RoleName == newDocumentRole);
+
+            if (System.IO.File.Exists(sourceAbsolutePath))
+            {
+                System.IO.File.Copy(sourceAbsolutePath, destinationAbsolutePath);
+                System.IO.File.Delete(sourceAbsolutePath);
+            }
+
+            if (newRole != null)
+                document.RoleID = newRole.RoleID;
+
+            documentManager.DocumentUpdate(document);
+
+            if (accessor.HttpContext.Session.GetString("UserRole") != null && accessor.HttpContext.Session.GetString("UserRole") == "Admin")
+            {
                 return RedirectToAction("GetDocumentList");
             }
             else
             {
-                foreach (var item in results.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
+                return RedirectToAction("GetDocumentListByRole");
             }
-            return View();
+
         }
 
         public IActionResult DownloadFile(int id)
