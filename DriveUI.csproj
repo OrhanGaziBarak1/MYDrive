@@ -24,11 +24,8 @@
   <ItemGroup>
     <Folder Include="wwwroot\Upload\Finance\" />
     <Folder Include="wwwroot\Upload\root\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\Upload\Software\2fedfb64-6c44-43d0-a441-ba169a51f43a" />
-    <None Include="wwwroot\Upload\Software\557a02f9-880e-4ded-be06-6adf4c952948" />
+    <Folder Include="wwwroot\Upload\root\Software\Project 1\V1\" />
+    <Folder Include="wwwroot\Upload\Software\" />
   </ItemGroup>
 
 </Project>

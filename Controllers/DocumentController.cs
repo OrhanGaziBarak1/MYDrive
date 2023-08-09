@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data.Entity;
-using static NuGet.Packaging.PackagingConstants;
 
 namespace DriveUI.Controllers
 {
@@ -50,7 +49,8 @@ namespace DriveUI.Controllers
             string userRole = "";
             if (user != null)
                 userRole += user.Role.RoleName;
-            var documentsByRole = context.Documents.Where(x => x.Folder.FolderName == userRole);
+            var documentsByRole = context.Documents.Where(x => x.Role.RoleName == userRole);
+
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 documentsByRole = documentsByRole.Where(s => s.DocumentName.Contains(searchTerm));
@@ -61,10 +61,11 @@ namespace DriveUI.Controllers
         [HttpGet]
         public IActionResult Upload()
         {
-            List<SelectListItem> folderValues = (from x in folderManager.GetFolders()
+            List<SelectListItem> folderValues = (from x in folderManager.GetFolders() 
+                                                 where x.FolderName != "root"
                                                  select new SelectListItem
                                                  {
-                                                     Text = x.FolderName,
+                                                     Text = getFoldersPath(x),
                                                      Value = x.FolderID.ToString()
                                                  }).ToList();
             ViewBag.Folders = folderValues;
@@ -74,10 +75,13 @@ namespace DriveUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Upload(IFormFile file, Document document)
         {
-            string path;
+            string absolutePath;
+            string[] splitedAbsolutePath;
+            string folderPath = "";
             string oldFileName = file.FileName;
             string fileType = file.ContentType;
             string newFileName = Guid.NewGuid().ToString();
+            string folderRole;
 
             document.DocumentName = oldFileName;
             document.Guid = newFileName;
@@ -88,23 +92,29 @@ namespace DriveUI.Controllers
             var folderValues = context.Folders.FirstOrDefault(x => x.FolderID == folderID);
 
             if (folderValues != null)
-                try
-                {
-                    path = Path.Combine("wwwroot\\Upload\\", folderValues.FolderName);
-                    if (!Directory.Exists(path))
-                    {
-                        Directory.CreateDirectory(path);
-                    }
-                    using (var fileStream = new FileStream(Path.Combine(path, newFileName), FileMode.Create))
-                    {
-                        await file.CopyToAsync(fileStream);
-                        TempData["FileUploadSuccess"] = "File upload success.";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("File upload failed.", ex);
-                }
+                folderPath = getFoldersPath(folderValues);
+
+            absolutePath = Path.Combine("wwwroot\\Upload\\", folderPath);
+
+            if (!Directory.Exists(absolutePath))
+            {
+                Directory.CreateDirectory(absolutePath);
+            }
+
+            using (var fileStream = new FileStream(Path.Combine(absolutePath, newFileName), FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+                TempData["FileUploadSuccess"] = "File upload success.";
+            }
+
+            splitedAbsolutePath = absolutePath.Split("\\");
+
+            folderRole = splitedAbsolutePath[3];
+
+            var role = context.Roles.FirstOrDefault(x => x.RoleName == folderRole);
+            if (role != null)
+                document.RoleID = role.RoleID;
+
             documentManager.DocumentAdd(document);
             return RedirectToAction("Upload");
         }
@@ -116,7 +126,7 @@ namespace DriveUI.Controllers
             List<SelectListItem> folderValues = (from x in folderManager.GetFolders()
                                                  select new SelectListItem
                                                  {
-                                                     Text = x.FolderName,
+                                                     Text = getFoldersPath(x),
                                                      Value = x.FolderID.ToString()
                                                  }).ToList();
             ViewBag.Folders = folderValues;
@@ -218,7 +228,6 @@ namespace DriveUI.Controllers
         {
             string documentPath = "";
             var document = context.Documents.FirstOrDefault(doc => doc.DocumentID == id);
-            
 
             if (document != null)
             {
@@ -236,6 +245,25 @@ namespace DriveUI.Controllers
                 return Problem("Something happened... :'(");
             }
 
+        }
+
+        public string getFoldersPath(Folder folder)
+        {
+            var folders = new List<string>();
+            var currentFolder = folder;
+            string path = "root\\";
+
+            while (currentFolder.FolderID != 1 && currentFolder.FolderName != "root")
+            {
+                folders.Add(currentFolder.FolderName);
+                currentFolder = folderManager.GetByID(currentFolder.RootFolderID);
+            }
+
+            for (int loop = folders.Count - 1; loop >= 0; loop--)
+            {
+                path += folders[loop] + "\\";
+            }
+            return path;
         }
     }
 }
