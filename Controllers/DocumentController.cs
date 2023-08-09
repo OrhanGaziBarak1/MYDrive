@@ -268,6 +268,9 @@ namespace DriveUI.Controllers
             if (newRole != null)
                 document.RoleID = newRole.RoleID;
 
+            if (documentNowValues != null)
+                document.DocumentType = documentNowValues.DocumentType;
+
             documentManager.DocumentUpdate(document);
 
             if (accessor.HttpContext.Session.GetString("UserRole") != null && accessor.HttpContext.Session.GetString("UserRole") == "Admin")
