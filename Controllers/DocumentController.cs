@@ -27,11 +27,6 @@ namespace DriveUI.Controllers
             this.accessor = accessor;
         }
 
-        //public DocumentController(IHttpContextAccessor accessor)
-        //{
-        //    this.accessor = accessor;
-        //}
-
         public async Task<IActionResult> GetDocumentList(string searchTerm)
         {
             var documents = from doc in context.Documents select doc;
@@ -213,6 +208,7 @@ namespace DriveUI.Controllers
             var documentValues = documentManager.GetByID(id);
 
             List<SelectListItem> folderValues = (from x in folderManager.GetFolders()
+                                                 where x.FolderName != "root"
                                                  select new SelectListItem
                                                  {
                                                      Text = getFoldersPath(x),
