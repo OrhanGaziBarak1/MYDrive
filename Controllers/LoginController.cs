@@ -2,6 +2,7 @@
 using BusinessLayer.ValidationRules;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using DotNetSix;
 using DriveUI.Models;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Mail;
 using System.Security.Claims;
 
 namespace DriveUI.Controllers
@@ -22,6 +24,9 @@ namespace DriveUI.Controllers
         LoginManager loginManager = new LoginManager();
         UserManager userManager = new UserManager(new EFUserDal());
         Context context = new Context();
+
+        static Random random = new Random();
+        int key = random.Next();
 
         public LoginController(IHttpContextAccessor accessor)
         {
@@ -69,11 +74,12 @@ namespace DriveUI.Controllers
                 if (claims[1].Value != "No Role")
                 {
                     return RedirectToAction("Index", "Home");
-                } else
+                }
+                else
                 {
                     return RedirectToAction("NoRoleHome", "Home");
                 }
- 
+
             }
             else
             {
@@ -136,21 +142,55 @@ namespace DriveUI.Controllers
         [HttpPost]
         public IActionResult MyProfile(User user)
         {
-            UserValidator validator = new UserValidator();
-            ValidationResult results = validator.Validate(user);
+            userManager.UserUpdate(user);
+            return RedirectToAction("MyProfile");
+        }
 
-            if (results.IsValid)
+        [HttpGet]
+        public IActionResult ForgotMyPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ForgotMyPassword(string mail)
+        {
+            var user = context.Users.FirstOrDefault(user => user.Mail == mail);
+
+            EmailSender myEmailSender = new EmailSender();
+
+            //Random random = new Random();
+            //int key = random.Next();
+
+            string subject = "Our Key";
+            string message = "Your key: " + key;
+
+
+            //if (user == null)
+            //{
+            //    TempData["NotUser"] = "You are not our user. Please register first.";
+            //}
+            //else
+            //{
+            myEmailSender.SendMailAsync(mail, subject, message);
+            //}
+            return RedirectToAction("ForgotMyPasswordKey");
+        }
+
+        [HttpGet]
+        public IActionResult ForgotMyPasswordKey()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ForgotMyPasswordKey(int userKey)
+        {
+            if (key == userKey)
             {
-                userManager.UserUpdate(user);
-                return RedirectToAction("Index", "Home");
+                TempData["KeySuccessfull"] = "Your key is true";
             }
-            else
-            {
-                foreach (var item in results.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
-            }
+
             return View();
         }
     }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yOBWDo1WyM9yaBqrqeP/um/k9NALmCbT7eQmFZsficw=",
+  "Hash": "FDyP/uY8GxzGNTf5g7Ar2ExTOMLfKZvuygp2kjRJdQU=",
   "Source": "DriveUI",
   "BasePath": "_content/DriveUI",
   "Mode": "Default",
@@ -66,23 +66,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
-    },
-    {
-      "Identity": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\eti-maden-logo.jpg",
-      "SourceId": "DriveUI",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\",
-      "BasePath": "_content/DriveUI",
-      "RelativePath": "eti-maden-logo.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\eti-maden-logo.jpg"
     },
     {
       "Identity": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\favicon.ico",
@@ -1105,12 +1088,12 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Identity": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\OrhanGaziBarakCV.html",
+      "Identity": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\Upload\\root\\Finance\\2b8e2f7b-eb50-40c2-a0e4-2c2ab887bf6b",
       "SourceId": "DriveUI",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\",
       "BasePath": "_content/DriveUI",
-      "RelativePath": "OrhanGaziBarakCV.html",
+      "RelativePath": "Upload/root/Finance/2b8e2f7b-eb50-40c2-a0e4-2c2ab887bf6b",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1119,15 +1102,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\OrhanGaziBarakCV.html"
+      "OriginalItemSpec": "wwwroot\\Upload\\root\\Finance\\2b8e2f7b-eb50-40c2-a0e4-2c2ab887bf6b"
     },
     {
-      "Identity": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\Upload\\root\\Software\\2b8e2f7b-eb50-40c2-a0e4-2c2ab887bf6b",
+      "Identity": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\Upload\\root\\Software\\Project 1\\56a8a484-7786-40b8-ba6a-3bcc57706c14",
       "SourceId": "DriveUI",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\",
       "BasePath": "_content/DriveUI",
-      "RelativePath": "Upload/root/Software/2b8e2f7b-eb50-40c2-a0e4-2c2ab887bf6b",
+      "RelativePath": "Upload/root/Software/Project 1/56a8a484-7786-40b8-ba6a-3bcc57706c14",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1136,7 +1119,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Upload\\root\\Software\\2b8e2f7b-eb50-40c2-a0e4-2c2ab887bf6b"
+      "OriginalItemSpec": "wwwroot\\Upload\\root\\Software\\Project 1\\56a8a484-7786-40b8-ba6a-3bcc57706c14"
+    },
+    {
+      "Identity": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\Upload\\root\\Software\\Project 1\\6966fbc2-33a4-4802-9c01-bfc3948446a2",
+      "SourceId": "DriveUI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\",
+      "BasePath": "_content/DriveUI",
+      "RelativePath": "Upload/root/Software/Project 1/6966fbc2-33a4-4802-9c01-bfc3948446a2",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Upload\\root\\Software\\Project 1\\6966fbc2-33a4-4802-9c01-bfc3948446a2"
     },
     {
       "Identity": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\Upload\\root\\Software\\Project 1\\V1\\d6e13fa6-5399-4fe0-b820-b99f4caab9d1",

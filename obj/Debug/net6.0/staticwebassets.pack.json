@@ -5,12 +5,16 @@
       "PackagePath": "staticwebassets\\DriveUI.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\OrhanGaziBarakCV.html",
-      "PackagePath": "staticwebassets\\OrhanGaziBarakCV.html"
+      "Id": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\Upload\\root\\Finance\\2b8e2f7b-eb50-40c2-a0e4-2c2ab887bf6b",
+      "PackagePath": "staticwebassets\\Upload\\root\\Finance"
     },
     {
-      "Id": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\Upload\\root\\Software\\2b8e2f7b-eb50-40c2-a0e4-2c2ab887bf6b",
-      "PackagePath": "staticwebassets\\Upload\\root\\Software"
+      "Id": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\Upload\\root\\Software\\Project 1\\56a8a484-7786-40b8-ba6a-3bcc57706c14",
+      "PackagePath": "staticwebassets\\Upload\\root\\Software\\Project 1"
+    },
+    {
+      "Id": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\Upload\\root\\Software\\Project 1\\6966fbc2-33a4-4802-9c01-bfc3948446a2",
+      "PackagePath": "staticwebassets\\Upload\\root\\Software\\Project 1"
     },
     {
       "Id": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\Upload\\root\\Software\\Project 1\\V1\\d6e13fa6-5399-4fe0-b820-b99f4caab9d1",
@@ -19,10 +23,6 @@
     {
       "Id": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
-    },
-    {
-      "Id": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\eti-maden-logo.jpg",
-      "PackagePath": "staticwebassets\\eti-maden-logo.jpg"
     },
     {
       "Id": "C:\\Users\\Orhan Gazi Barak\\source\\repos\\DriveUI\\wwwroot\\favicon.ico",

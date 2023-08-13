@@ -16,10 +16,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <div style="display:flex; align-items:center; width:5%; margin-right:4%;">
-                    <img src="~/eti-maden-logo.jpg" style="width:120%; height:120%" />
-                    <p class="navbar-brand" style="margin-top:5%;">Drive</p>
-                </div>
+                <p class="navbar-brand" style="margin-top:1%;">MYDrive</p>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -27,6 +24,7 @@
                 <div class="navbar-collapse collapse justify-content-between">
                     @if (accessor.HttpContext.Session.GetString("UserRole") != null && accessor.HttpContext.Session.GetString("UserRole") == "Admin")
                     {
+
                         <ul class="navbar-nav flex-grow-0">
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="GetUsers">Users</a>
@@ -67,7 +65,8 @@
                                     </span>
                                     <input type="text" name="searchTerm" placeholder="Search..." class="form-control" />
                                 </form>
-                            } else
+                            }
+                            else
                             {
                                 <form method="post" asp-action="GetDocumentList" asp-controller="Document" style="display:flex; align-items:center; margin-right:15px;">
                                     <span class="material-symbols-outlined" style="margin-right:15px;">
@@ -98,7 +97,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container-fluid" style="display:flex; align-items:center;">
-            &copy; 2023 - Developed by <a class="nav-link text-dark" href="~/orhangazibarakcv.html">
+            Developed by <a class="nav-link text-dark" href="https://www.linkedin.com/in/orhangazibarak/">
                 Orhan Gazi Barak
             </a>
         </div>

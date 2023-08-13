@@ -271,3 +271,9 @@ C:\Users\Orhan Gazi Barak\source\repos\DriveUI\bin\Debug\net6.0\runtimes\win-x86
 C:\Users\Orhan Gazi Barak\source\repos\DriveUI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\Orhan Gazi Barak\source\repos\DriveUI\bin\Debug\net6.0\BCrypt.Net-Next.dll
 C:\Users\Orhan Gazi Barak\source\repos\DriveUI\bin\Debug\net6.0\BCrypt.Net-Next.xml
+C:\Users\Orhan Gazi Barak\source\repos\DriveUI\bin\Debug\net6.0\packages\MimeKit.4.1.0\lib\net462\MimeKit.dll.config
+C:\Users\Orhan Gazi Barak\source\repos\DriveUI\bin\Debug\net6.0\packages\MimeKit.4.1.0\lib\net47\MimeKit.dll.config
+C:\Users\Orhan Gazi Barak\source\repos\DriveUI\bin\Debug\net6.0\packages\MimeKit.4.1.0\lib\net48\MimeKit.dll.config
+C:\Users\Orhan Gazi Barak\source\repos\DriveUI\bin\Debug\net6.0\packages\MimeKit.4.1.0\lib\net6.0\MimeKit.dll.config
+C:\Users\Orhan Gazi Barak\source\repos\DriveUI\bin\Debug\net6.0\packages\MimeKit.4.1.0\lib\netstandard2.0\MimeKit.dll.config
+C:\Users\Orhan Gazi Barak\source\repos\DriveUI\bin\Debug\net6.0\packages\MimeKit.4.1.0\lib\netstandard2.1\MimeKit.dll.config
