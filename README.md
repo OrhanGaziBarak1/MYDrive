@@ -3,7 +3,7 @@
 - The documents which are uploaded by you seperated by department and users only see his/her departments documents.
 ---
 - I developed this project with multi-layer style other layers there are:
-  - ### Entity Layer (link)
+  - ### [Entity Layer](https://github.com/OrhanGaziBarak1/EntityLayer-MYDrive.git)
       - There are models of database in this layer.
   - ### Business Layer (link)
       - There are functions' of application in this layer. 
