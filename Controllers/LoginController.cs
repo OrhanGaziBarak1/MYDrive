@@ -25,9 +25,6 @@ namespace DriveUI.Controllers
         UserManager userManager = new UserManager(new EFUserDal());
         Context context = new Context();
 
-        static Random random = new Random();
-        int key = random.Next();
-
         public LoginController(IHttpContextAccessor accessor)
         {
             this.accessor = accessor;
@@ -73,7 +70,14 @@ namespace DriveUI.Controllers
 
                 if (claims[1].Value != "No Role")
                 {
-                    return RedirectToAction("Index", "Home");
+                    if (claims[1].Value == "Admin")
+                    {
+                        return RedirectToAction("Document", "GetDocumentList");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Document", "GetDocumentListByRole" + accessor.HttpContext.Session.GetInt32("UserID"));
+                    }
                 }
                 else
                 {
@@ -144,54 +148,6 @@ namespace DriveUI.Controllers
         {
             userManager.UserUpdate(user);
             return RedirectToAction("MyProfile");
-        }
-
-        [HttpGet]
-        public IActionResult ForgotMyPassword()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult ForgotMyPassword(string mail)
-        {
-            var user = context.Users.FirstOrDefault(user => user.Mail == mail);
-
-            EmailSender myEmailSender = new EmailSender();
-
-            //Random random = new Random();
-            //int key = random.Next();
-
-            string subject = "Our Key";
-            string message = "Your key: " + key;
-
-
-            //if (user == null)
-            //{
-            //    TempData["NotUser"] = "You are not our user. Please register first.";
-            //}
-            //else
-            //{
-            myEmailSender.SendMailAsync(mail, subject, message);
-            //}
-            return RedirectToAction("ForgotMyPasswordKey");
-        }
-
-        [HttpGet]
-        public IActionResult ForgotMyPasswordKey()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult ForgotMyPasswordKey(int userKey)
-        {
-            if (key == userKey)
-            {
-                TempData["KeySuccessfull"] = "Your key is true";
-            }
-
-            return View();
         }
     }
 }

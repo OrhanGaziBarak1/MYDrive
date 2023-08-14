@@ -1,5 +1,3 @@
-using BusinessLayer.Abstract;
-using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
 using EntityLayer.Concrete;
 using FluentValidation;
@@ -30,8 +28,6 @@ builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
-
-builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 var app = builder.Build();
 

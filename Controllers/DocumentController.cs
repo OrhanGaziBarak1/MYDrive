@@ -125,7 +125,7 @@ namespace DriveUI.Controllers
             }
             else
             {
-                return RedirectToAction("GetDocumentListByRole");
+                return RedirectToAction("GetDocumentListByRole/" + accessor.HttpContext.Session.GetInt32("UserID"));
             }
 
         }

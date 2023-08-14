@@ -1040,6 +1040,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\root\Software\Project 1\6966fbc2-33a4-4802-9c01-bfc3948446a2))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\root\Software\Project 1\V1\c05be93f-9841-43ab-ad60-6cbdf7ad6fd0))">
+      <SourceType>Package</SourceType>
+      <SourceId>DriveUI</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/DriveUI</BasePath>
+      <RelativePath>Upload/root/Software/Project 1/V1/c05be93f-9841-43ab-ad60-6cbdf7ad6fd0</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\root\Software\Project 1\V1\c05be93f-9841-43ab-ad60-6cbdf7ad6fd0))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\root\Software\Project 1\V1\d6e13fa6-5399-4fe0-b820-b99f4caab9d1))">
       <SourceType>Package</SourceType>
       <SourceId>DriveUI</SourceId>
