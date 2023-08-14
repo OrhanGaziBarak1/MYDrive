@@ -5,10 +5,10 @@
 - I developed this project with multi-layer style other layers there are:
   - ### [Entity Layer](https://github.com/OrhanGaziBarak1/EntityLayer-MYDrive.git)
       - There are models of database in this layer.
-  - ### Business Layer (link)
-      - There are functions' of application in this layer. 
-  - ### Data Access Layer (link)
-      - There are context class and migrations in this layer.
+  - ### [Business Layer](https://github.com/OrhanGaziBarak1/BusinessLayer-MYDrive.git)
+      - There are functions of application in this layer. 
+  - ### [Data Access Layer](https://github.com/OrhanGaziBarak1/DataAccessLayer-MYDrive.git)
+      - There are functions of database tables, context class and migrations in this layer.
 ---
 ## Cons
 - Validation rules are not working.
